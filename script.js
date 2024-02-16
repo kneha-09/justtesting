@@ -53,28 +53,21 @@
 
 
 
-
-// puzzle game 
 document.addEventListener("DOMContentLoaded", function() {
-    const welcomeText = document.querySelector(".welcome-text");
-    const developerText = document.querySelector(".developer-text");
-
-    animateText(welcomeText, "Welcome", 50);
-    setTimeout(() => animateText(developerText, "to the Web Developer's World", 50), 1500);
-});
-
-function animateText(element, text, speed) {
-    let index = 0;
-
-    function typeNextLetter() {
-        if (index < text.length) {
-            element.textContent += text.charAt(index);
-            index++;
-            setTimeout(typeNextLetter, speed);
-        }
-    }
-
-    typeNextLetter();
-}
-
-
+    const pieces = document.querySelectorAll('.puzzle-piece');
+  
+    // Randomly rotate puzzle pieces
+    pieces.forEach(piece => {
+      const randomRotation = Math.floor(Math.random() * 360);
+      piece.style.transform = `rotate(${randomRotation}deg)`;
+    });
+  
+    // Move puzzle pieces to correct positions after delay
+    setTimeout(() => {
+      document.getElementById('piece1').style.transform = 'rotate(0deg) translate(0, 0)';
+      document.getElementById('piece2').style.transform = 'rotate(0deg) translate(200px, 0)';
+      document.getElementById('piece3').style.transform = 'rotate(0deg) translate(0, 200px)';
+      document.getElementById('piece4').style.transform = 'rotate(0deg) translate(200px, 200px)';
+    }, 1000);
+  });
+  
