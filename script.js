@@ -26,7 +26,12 @@ function animateTyping(element, text) {
 
     function typeNextLetter() {
         if (index < text.length) {
-            element.textContent += text.charAt(index);
+            if (text.charAt(index) === ' ') {
+                // If it's a space, insert a non-breaking space to preserve layout
+                element.innerHTML += '&nbsp;';
+            } else {
+                element.innerHTML += `<span class="city-letter">${text.charAt(index)}</span>`;
+            }
             index++;
             setTimeout(typeNextLetter, speed);
         }

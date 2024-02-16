@@ -19,3 +19,7 @@ body {
     font-size: 18px;
     color: #666; /* Medium text color */
 }
+/* Add this to your CSS file */
+.city-letter {
+    color: blue; /* Change this to your desired color */
+}
