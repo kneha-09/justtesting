@@ -55,39 +55,26 @@
 
 
 // puzzle game 
-
 document.addEventListener("DOMContentLoaded", function() {
-    const puzzlePieces = document.querySelectorAll('.puzzle-piece');
+    const welcomeText = document.querySelector(".welcome-text");
+    const developerText = document.querySelector(".developer-text");
 
-    puzzlePieces.forEach(piece => {
-        piece.addEventListener('mousedown', startDragging);
-        piece.addEventListener('mouseup', stopDragging);
-    });
+    animateText(welcomeText, "Welcome", 50);
+    setTimeout(() => animateText(developerText, "to the Web Developer's World", 50), 1500);
 });
 
-function startDragging(event) {
-    this.style.zIndex = '100'; // Bring the dragged piece to the front
-    this.style.transition = 'none'; // Disable transitions during dragging
-    this.style.cursor = 'grabbing'; // Change cursor to grabbing when dragging
+function animateText(element, text, speed) {
+    let index = 0;
 
-    let shiftX = event.clientX - this.getBoundingClientRect().left;
-    let shiftY = event.clientY - this.getBoundingClientRect().top;
-
-    function movePiece(event) {
-        this.style.left = event.clientX - shiftX + 'px';
-        this.style.top = event.clientY - shiftY + 'px';
+    function typeNextLetter() {
+        if (index < text.length) {
+            element.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeNextLetter, speed);
+        }
     }
 
-    document.addEventListener('mousemove', movePiece.bind(this));
-
-    this.addEventListener('mouseup', function stopDragging() {
-        this.style.transition = 'all 0.3s ease'; // Re-enable transitions after dragging
-        this.style.cursor = 'grab'; // Change cursor back to grab after dragging
-        document.removeEventListener('mousemove', movePiece.bind(this));
-        this.removeEventListener('mouseup', stopDragging);
-    });
+    typeNextLetter();
 }
 
-function stopDragging(event) {
-    event.stopPropagation(); // Prevent mouseup from triggering startDragging again
-}
+
