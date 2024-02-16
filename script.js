@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Fetch visitor's location using IPinfo API
-    fetch('https://ipinfo.io/json?token=YOUR_TOKEN_HERE')
+    fetch('https://ipinfo.io/json?token=ae91acbcf2d589')
         .then(response => response.json())
         .then(data => {
             const city = data.city || 'Friend';
