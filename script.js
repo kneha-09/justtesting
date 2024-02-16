@@ -1,19 +1,39 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const cityElement = document.getElementById('city');
+    const timeOfDayElement = document.getElementById('timeOfDay');
+
     // Fetch visitor's location using IPinfo API
-    fetch('https://ipinfo.io/json?token=ae91acbcf2d589')
+    fetch('https://ipinfo.io/json?token=YOUR_TOKEN_HERE')
         .then(response => response.json())
         .then(data => {
             const city = data.city || 'Friend';
             const timeOfDay = getTimeOfDay();
 
-            // Update welcome message with personalized greeting
-            document.getElementById('greeting').textContent = `Welcome, ${city}!`;
-            document.getElementById('location').textContent = `Good ${timeOfDay}.`;
+            // Animate typing effect for city name
+            animateTyping(cityElement, city);
+
+            // Update time of day message
+            timeOfDayElement.textContent = `Good ${timeOfDay}.`;
         })
         .catch(error => {
             console.error('Error fetching IP information:', error);
         });
 });
+
+function animateTyping(element, text) {
+    const speed = 100; // Typing speed in milliseconds
+    let index = 0;
+
+    function typeNextLetter() {
+        if (index < text.length) {
+            element.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeNextLetter, speed);
+        }
+    }
+
+    typeNextLetter();
+}
 
 function getTimeOfDay() {
     const hour = new Date().getHours();
